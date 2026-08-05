@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bank Tracker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .box {
+      background-color: white;
+      max-width: 500px;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: lightblue;
+      border: none;
+      cursor: pointer;
+    }
+
+    .result {
+      margin-top: 15px;
+      padding: 10px;
+      background-color: #eee;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="box">
+    <h1>Bank Income and Expense Tracker</h1>
+
+    <p><strong>Balance:</strong> <span id="balance">$0.00</span></p>
+    <p><strong>Income:</strong> <span id="income">$0.00</span></p>
+    <p><strong>Expense:</strong> <span id="expense">$0.00</span></p>
+
+    <input type="text" id="description" placeholder="Enter description">
+    <input type="number" id="amount" placeholder="Enter amount">
+    
+    <select id="type">
+      <option value="income">Income</option>
+      <option value="expense">Expense</option>
+    </select>
+
+    <button onclick="addTransaction()">Add Transaction</button>
+
+    <div class="result">
+      <h3>Transaction List</h3>
+      <ul id="transactionList"></ul>
+    </div>
+  </div>
+
+  <script>
+    let balance = 0;
+    let income = 0;
+    let expense = 0;
+
+    function addTransaction() {
+      let description = document.getElementById("description").value;
+      let amount = parseFloat(document.getElementById("amount").value);
+      let type = document.getElementById("type").value;
+
+      if (description === "" || isNaN(amount) || amount <= 0) {
+        alert("Please enter valid details.");
+        return;
+      }
+
+      let list = document.getElementById("transactionList");
+      let item = document.createElement("li");
+
+      if (type === "income") {
+        income = income + amount;
+        balance = balance + amount;
+        item.textContent = "Income: " + description + " +$" + amount.toFixed(2);
+      } else {
+        expense = expense + amount;
+        balance = balance - amount;
+        item.textContent = "Expense: " + description + " -$" + amount.toFixed(2);
+      }
+
+      list.appendChild(item);
+
+      document.getElementById("balance").textContent = "$" + balance.toFixed(2);
+      document.getElementById("income").textContent = "$" + income.toFixed(2);
+      document.getElementById("expense").textContent = "$" + expense.toFixed(2);
+
+      document.getElementById("description").value = "";
+      document.getElementById("amount").value = "";
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>javascript task</title>
+  <style>
+    body {
+      background: white;
+      font-family: arial;
+      padding: 20px;
+    }
+
+    h1 {
+      color: blue;
+    }
+
+    .box {
+      border: 1px solid black;
+      margin: 10px;
+      padding: 10px;
+    }
+
+    button {
+      background: lightgray;
+      border: 1px solid black;
+      padding: 5px;
+      margin-top: 5px;
+    }
+
+    .result {
+      border: 1px solid gray;
+      padding: 8px;
+      margin-top: 10px;
+      min-height: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>js practice</h1>
+
+  <div class="box">
+    <h3>data type checker</h3>
+    <button onclick="checkTypes()">click here</button>
+    <div class="result" id="typeResult"></div>
+  </div>
+
+  <div class="box">
+    <h3>convert data types</h3>
+    <button onclick="convertTypes()">click here</button>
+    <div class="result" id="convertResult"></div>
+  </div>
+
+  <div class="box">
+    <h3>search and replace text</h3>
+    <button onclick="replaceText()">click here</button>
+    <div class="result" id="textResult"></div>
+  </div>
+
+  <div class="box">
+    <h3>error catcher</h3>
+    <button onclick="catchError()">click here</button>
+    <div class="result" id="errorResult"></div>
+  </div>
+
+  <script>
+    function checkTypes() {
+      let name = "Aarav";
+      let score = 45;
+      let is_ok = true;
+
+      document.getElementById("typeResult").innerHTML =
+        "name type is " + typeof name + "<br>" +
+        "score type is " + typeof score + "<br>" +
+        "boolean type is " + typeof is_ok;
+    }
+
+    function convertTypes() {
+      let a = "88";
+      let b = 12;
+
+      let n = Number(a);
+      let s = String(b);
+
+      document.getElementById("convertResult").innerHTML =
+        "number is " + n + "<br>" +
+        "text is " + s;
+    }
+
+    function replaceText() {
+      let sentence = "maths is useful";
+      let changed = sentence.replace("maths", "coding");
+
+      document.getElementById("textResult").innerHTML =
+        "old sentence: " + sentence + "<br>" +
+        "new sentence: " + changed;
+    }
+
+    function catchError() {
+      try {
+        let x = notDefinedThing + 5;
+      } catch (error) {
+        document.getElementById("errorResult").innerHTML =
+          "error found: " + error.message;
+      }
+    }
+  </script>
+
+</body>
+</html>

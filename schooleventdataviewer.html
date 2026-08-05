@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>School Event Data Viewer</title> 
+  <style>
+    body {text-align: center;}
+    .event-card {width: 520px;border: 3px solid;margin: 40px auto;padding: 25px;}
+    button {background-color: black;color: white;padding: 15px;font-weight: bold;}
+    button:hover {background-color: white;color: black;}
+    .info-box {border: 2px solid black;margin: 20px;padding: 15px;text-align: left;}
+    #status {color: green;}
+    #output {color: #7c2d12;}
+  </style>
+</head>
+<body>
+  <div class="event-card">
+    <h1>School Event Data Viewer</h1>
+    <p>Click the button</p>
+    <button onclick="showSchoolEvent()">Load Event Details</button>
+    <div class="info-box">
+      <h2>Loading Status</h2>
+      <p id="status">Waiting to load event data...</p>
+    </div>
+    <div class="info-box">
+      <h2>Event Details</h2>
+      <p id="eventDetails"></p>
+    </div>
+    <div class="info-box">
+      <h2>JSON Text Output</h2>
+      <p id="jsonOutput"></p>
+    </div>
+  </div>
+  <script>
+    function showLoadingMessage(message) {
+      document.getElementById("status").innerHTML = message;
+    }
+    function fetchSchoolEventData(callback) {
+      callback("Loading school event data... Please wait.");
+      return new Promise(function(resolve) {
+        setTimeout(function() {
+          let schoolEvent = {
+            eventName: "Sports Day",
+            date: "25 March",
+            time: "9 AM",
+            venue: "Wan Chai Sports Ground",
+            coordinator: "Ms. Chan,
+            participants: 1000,
+            isRegistrationOpen: true
+          };
+          resolve(schoolEvent);
+        }, 2000);
+      });
+    }
+    async function showSchoolEvent() {
+      let eventData = await fetchSchoolEventData(showLoadingMessage);
+      document.getElementById("status").innerHTML = "Event data loaded successfully!";
+      let jsonText = JSON.stringify(eventData);
+      let parsedEvent = JSON.parse(jsonText);
+      let eventMessage = "";
+      eventMessage = eventMessage + "Event Name: " + parsedEvent.eventName + "<br>";
+      eventMessage = eventMessage + "Date: " + parsedEvent.date + "<br>";
+      eventMessage = eventMessage + "Time: " + parsedEvent.time + "<br>";
+      eventMessage = eventMessage + "Venue: " + parsedEvent.venue + "<br>";
+      eventMessage = eventMessage + "Coordinator: " + parsedEvent.coordinator + "<br>";
+      eventMessage = eventMessage + "Participants: " + parsedEvent.participants + "<br>";
+      if (parsedEvent.isRegistrationOpen === true) {
+        eventMessage = eventMessage + "Registration Status: Open";
+      } else {
+        eventMessage = eventMessage + "Registration Status: Closed";
+      }
+      document.getElementById("eventDetails").innerHTML = eventMessage;
+      document.getElementById("jsonOutput").innerHTML = jsonText;
+    }
+  </script> 
+</body>
+</html>

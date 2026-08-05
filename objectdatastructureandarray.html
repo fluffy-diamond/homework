@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>JavaScript Objects and Arrays</h2>
+
+<p id="one"></p>
+<p id="two"></p>
+<p id="three"></p>
+
+<script>
+var person = {
+  name: "Tinu"
+};
+
+var colors = [
+  "Red",
+  "Blue",
+  "Green",
+  "Yellow",
+  "Pink"
+];
+
+document.getElementById("one").innerHTML = person.name;
+document.getElementById("two").innerHTML = colors[0] + ", " + colors[1] + ", " + colors[2] + ", " + colors[3] + ", " + colors[4];
+
+colors.push("Purple");
+colors.pop();
+colors.sort();
+colors.reverse();
+
+document.getElementById("three").innerHTML = colors;
+</script>
+
+</body>
+</html>
